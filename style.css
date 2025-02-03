@@ -1,0 +1,42 @@
+/* style.css */
+:root {
+    --neon-cyan: #00f7ff;
+    --neon-pink: #ff00ff;
+    --neon-purple: #bc13fe;
+    --neon-green: #39ff14;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes scanline {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+}
+
+.cyber-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 25%,
+        rgba(0, 247, 255, 0.1) 50%,
+        transparent 75%
+    );
+    animation: scanline 4s linear infinite;
+}
+
+.glitch-text {
+    position: relative;
+}

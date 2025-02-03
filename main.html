@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cyberpunk Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* Custom Cyberpunk Styles */
+    :root {
+      --accent: #00ffea;
+      /* Default Cyberpunk accent */
+      --background: #0a0a0a;
+      --text: #ffffff;
+    }
+
+    #particles-js {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    body {
+      font-family: "Roboto Mono", monospace;
+      background: var(--background);
+      color: var(--text);
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Orbitron", sans-serif;
+    }
+
+    .neon-text {
+      text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent),
+        0 0 20px var(--accent);
+    }
+
+    .glitch-text {
+      position: relative;
+      animation: glitch 2s infinite;
+    }
+
+    @keyframes glitch {
+      0% {
+        transform: translate(0);
+      }
+
+      20% {
+        transform: translate(-2px, 2px);
+      }
+
+      40% {
+        transform: translate(-2px, -2px);
+      }
+
+      60% {
+        transform: translate(2px, 2px);
+      }
+
+      80% {
+        transform: translate(2px, -2px);
+      }
+
+      100% {
+        transform: translate(0);
+      }
+    }
+
+    .holographic-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--accent);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .holographic-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px var(--accent);
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      background: url("https://i.pinimg.com/originals/3f/2c/97/3f2c979b214d06e9caab8ba8326864f3.gif") center/cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Floating Dock Navbar */
+    .dock-navbar {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .dock-item {
+      background: rgba(0, 255, 234, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: transform 0.3s ease, background 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .dock-item:hover {
+      transform: scale(1.2) translateY(-5px);
+      background: rgba(0, 255, 234, 0.2);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    /* Theme Switcher */
+    .theme-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .theme-switcher button {
+      background: rgba(0, 255, 234, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .theme-switcher button:hover {
+      background: rgba(0, 255, 234, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Neon Grid Background */
+    .neon-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          rgba(0, 0, 0, 0.1) 1px,
+          transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: -1;
+      animation: grid-scroll 10s linear infinite;
+    }
+
+    @keyframes grid-scroll {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Hacking Terminal Effect */
+    .terminal {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: rgba(0, 0, 0, 0.8);
+      border-top: 2px solid var(--accent);
+      color: var(--accent);
+      font-family: "Roboto Mono", monospace;
+      padding: 10px;
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .terminal::after {
+      content: ">";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Tech Arsenal Section */
+    .skill-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px var(--accent);
+    }
+
+    .skill-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Work Experience Section */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      padding: 20px;
+      position: relative;
+      width: 50%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border: 3px solid var(--background);
+      border-radius: 50%;
+      top: 20px;
+      right: -10px;
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(even)::after {
+      left: -10px;
+    }
+
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px var(--accent);
+    }
+
+    /* About Me Section Styles */
+    .about-section {
+      position: relative;
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+
+    .about-image {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      margin: 0 auto;
+      border-radius: 125px;
+      overflow: hidden;
+      border: 2px solid var(--accent);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      border-radius: 125px;
+
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .about-content {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 2rem;
+      backdrop-filter: blur(10px);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .dock-navbar {
+        bottom: 0;
+        right: 0;
+        top: auto;
+        left: 0;
+        transform: none;
+        flex-direction: row;
+        justify-content: space-around;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        border-top: 1px solid var(--accent);
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 30px;
+      }
+
+      .timeline::before {
+        left: 30px;
+      }
+
+      .timeline-item::after {
+        left: 21px !important;
+        right: auto !important;
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .text-6xl {
+        font-size: 2.5rem;
+      }
+
+      .about-image {
+        width: 200px;
+        height: 200px;
+      }
+
+      .about-content {
+        margin: 1rem;
+      }
+    }
+
+    .about-section .relative:hover img {
+      transform: scale(1.02);
+      transition: all 0.3s ease;
+    }
+
+    .about-section img {
+      transition: all 0.3s ease;
+    }
+
+    .tech-glow-text {
+      color: #0ff;
+      /* Cyan glow */
+      text-shadow: 0 0 8px #0ff, 0 0 16px #0ff, 0 0 32px rgba(0, 255, 255, 0.8);
+      animation: pulse-glow 2s infinite alternate;
+    }
+
+    /* Glow Pulsing Effect */
+    @keyframes pulse-glow {
+      0% {
+        text-shadow: 0 0 8px #0ff, 0 0 16px #0ff, 0 0 32px rgba(0, 255, 255, 0.8);
+      }
+
+      100% {
+        text-shadow: 0 0 12px #0ff, 0 0 24px #0ff, 0 0 40px rgba(0, 255, 255, 1);
+      }
+    }
+
+    /* Enhanced Glitch Effect */
+    .hud-glitch-text {
+      position: relative;
+      display: inline-block;
+      animation: glitch-effect 1.2s infinite linear alternate-reverse;
+    }
+
+    /* Social Icons */
+    .social-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-link {
+      font-size: 2rem;
+      color: #ffffff;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: scale(1.2);
+      text-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500;
+    }
+
+    /* Individual Icon Colors */
+    .social-twitter:hover {
+      color: #1da1f2;
+    }
+
+    .social-facebook:hover {
+      color: #1877f2;
+    }
+
+    .social-github:hover {
+      color: #000;
+    }
+
+    .social-linkedin:hover {
+      color: #0077b5;
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+  <!-- Theme Switcher -->
+  <div class="theme-switcher">
+    <button id="theme-toggle">Switch Theme</button>
+  </div>
+
+  <!-- Neon Grid Background -->
+  <div class="neon-grid"></div>
+
+  <!-- Particle Background -->
+  <div id="particles-js" class="particles-js">
+  </div>
+
+  <!-- Floating Dock Navbar -->
+  <div class="dock-navbar">
+    <a href="#home" class="dock-item"><i class="fas fa-home"></i></a>
+    <a href="#skills" class="dock-item"><i class="fas fa-code"></i></a>
+    <a href="#experience" class="dock-item"><i class="fas fa-briefcase"></i></a>
+    <a href="#projects" class="dock-item"><i class="fas fa-project-diagram"></i></a>
+    <a href="#contact" class="dock-item"><i class="fas fa-envelope"></i></a>
+  </div>
+
+  <!-- Landing Page -->
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center">
+    <div class="avatar-container">
+      <div class="avatar"></div>
+    </div>
+    <!-- <h1 class="text-6xl font-bold neon-text glitch-text mt-6">
+      Welcome to My Cyberpunk World
+    </h1>
+    <p class="text-xl text-gray-400 mt-4">
+      Building the Future with React Native, AI, and Backend Magic
+    </p> -->
+    <h1 class="text-5xl font-bold neon-text glitch-text mt-6">
+      Building the Future, One Line at a Time
+    </h1>
+    <p class="text-xl text-gray-400 mt-4">
+      Where React Native, AI & Backend Tech Forge the Next Evolution
+    </p>
+  </section>
+  <!-- About Section -->
+
+  <section id="about" class="about-section min-h-screen flex flex-col justify-center items-center px-4 relative">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="my_pic.PNG" alt="Tausif Arif" class="w-full h-full object-cover opacity-20" />
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center max-w-2xl">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">About Me</h2>
+
+      <!-- Short and Impactful Bio -->
+      <p class="text-lg leading-relaxed text-gray-300">
+        In a world where code is the lifeblood of innovation, one tech maverick stands at the crossroads of <strong
+          class="text-blue-400"> React Native and AI.</strong>
+        <strong class="text-blue-400">Tausif Arif</strong>—part developer, part futurist—crafts solutions with the
+        precision of **Stark tech** and the ingenuity of **Wakandan design**.
+
+        When others see limits, he sees a **sandbox of infinite possibilities**. Integrating **LLMs** with seamless user
+        experiences,
+        he doesn’t just write code—he **engineers the next evolution** of mobile technology.
+
+        <span class="text-red-500 font-bold">Suit up. The future isn't going to build itself. 🚀</span>
+      </p>
+
+      <!-- Social Media Links -->
+      <div class="social-container mt-6 flex justify-center space-x-6">
+        <a href="https://x.com/__tausif" target="_blank" class="social-link social-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.facebook.com/og.tausif" target="_blank" class="social-link social-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://github.com/tausif-arif" target="_blank" class="social-link social-github">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/original-tausif" target="_blank" class="social-link social-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12 relative z-10">
+    <!-- Tech Arsenal Section -->
+    <section id="skills" class="mb-12">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">
+        Tech Arsenal
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-12 relative">
+        <!-- Dynamic Skills -->
+        <script>
+          const skills = [
+            { name: "React Native", icon: "fab fa-react" },
+            { name: "LLM Integration", icon: "fas fa-brain" },
+            { name: "Python", icon: "fab fa-python" },
+            { name: "FastAPI", icon: "fas fa-bolt" },
+            { name: "LangChain", icon: "fas fa-link" },
+            { name: "Node.js", icon: "fab fa-node" },
+            { name: "Next Js", icon: "fab fa-js" },
+            { name: "Docker", icon: "fab fa-docker" },
+          ];
+
+          skills.forEach((skill) => {
+            document.write(`
+             <div class="flex flex-col items-center justify-center text-center">
+          <i class="${skill.icon} skill-icon"></i>
+          <h3 class="text-xl font-semibold">${skill.name}</h3>
+        </div> `);
+          });
+        </script>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="mb-12">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">
+        Work Experience
+      </h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3 class="text-xl font-semibold">
+              Software Engineer - Aeon Logiciel
+            </h3>
+            <p class="text-gray-400">Jan 2022 - Present</p>
+            <p class="mt-2">
+              Built cross-platform mobile apps with React Native for iOS and Android, integrating LLM APIs for
+              AI-powered features. Also provided web app support using React.js for seamless cross-platform performance.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3 class="text-xl font-semibold">AI Developer - ABC Inc</h3>
+            <p class="text-gray-400">Jun 2020 - Dec 2021</p>
+            <p class="mt-2">
+              Built AI-powered chatbots using Python, FastAPI, and LangChain.
+              Deployed scalable backend solutions using Node.js and AWS.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section id="projects">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">AI Chat Assistant</h3>
+          <p class="text-gray-400">
+            Built with Python, FastAPI, and LangChain. Integrated with React
+            Native for mobile access.
+          </p>
+        </div>
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">E-Commerce App</h3>
+          <p class="text-gray-400">
+            Developed using React Native for iOS and Android. Backend powered
+            by Node.js and AWS.
+          </p>
+        </div>
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">3D Interactive Portfolio</h3>
+          <p class="text-gray-400">
+            Built with Three.js for immersive 3D visuals and animations.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer bg-gray-800 text-center py-6 mt-12 relative z-10">
+    <p class="text-gray-400">
+      © <span id="current-year"></span> My Portfolio. All rights reserved.
+    </p>
+    <p class="text-gray-400 mt-2">Made with ❤️ by Tausif</p>
+  </footer>
+
+  <!-- Particle.js Script -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS.load("particles-js", "particles.json", function () {
+      console.log("Particles.js loaded!");
+    });
+
+    // Make particles interactive
+    particlesJS.interact("particles-js", {
+      onhover: {
+        enable: true,
+        mode: "bubble",
+      },
+    });
+  </script>
+
+  <!-- Theme Switcher Script -->
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const body = document.body;
+    const themes = [
+      {
+        name: "Neon Purple",
+        background: "#1a1a2e",
+        text: "#ffffff",
+        accent: "#9c27b0",
+      },
+      {
+        name: "Cyberpunk",
+        background: "#0a0a0a",
+        text: "#ffffff",
+        accent: "#00ffea",
+      },
+      {
+        name: "Matrix",
+        background: "#000000",
+        text: "#00ff00",
+        accent: "#00ff00",
+      },
+      {
+        name: "Iron Man",
+        background: "#2a0a0a",
+        text: "#ffcc00",
+        accent: "#ff4444",
+      },
+      {
+        name: "Captain America",
+        background: "#0a0a2a",
+        text: "#ffffff",
+        accent: "#0044ff",
+      },
+      {
+        name: "Knowhere",
+        background: "#1a0a2a",
+        text: "#ffffff",
+        accent: "#ff9500",
+      },
+     
+      {
+        name: "Wakanda Forever",
+        background: "#0a1a2a",
+        text: "#ffffff",
+        accent: "#b39ddb",
+      },
+      {
+        name: "Nidavellir",
+        background: "#0a1a1a",
+        text: "#ffffff",
+        accent: "#4caf50",
+      },
+      {
+        name: "Neon Tokyo",
+        background: "#1a1a2e",
+        text: "#ffffff",
+        accent: "#ff6f61",
+      },
+      // {
+      //   name: "Synthwave",
+      //   background: "#1a0a2a",
+      //   text: "#ffffff",
+      //   accent: "#ff00ff",
+      // },
+      {
+        name: "Retro Futurism",
+        background: "#0a1a2a",
+        text: "#ffffff",
+        accent: "#ffcc00",
+      },
+      {
+        name: "Hulk",
+        background: "#0a2a0a",
+        text: "#ffffff",
+        accent: "#4caf50",
+      },
+      {
+        name: "Endgame",
+        background: "#1a0a0a",
+        text: "#ffffff",
+        accent: "#ff4444",
+      },
+      {
+        name: "Glacier",
+        background: "#e7ebf8",
+        text: "#004d40",
+        accent: "#00bcd4",
+      },
+      {
+        name: "ImGroot",
+        background: "#0a0a1a",
+        text: "#ffffff",
+        accent: "#4caf50",
+      },
+      // {
+      //   name: "Guardians of the Galaxy",
+      //   background: "#1a0a1a",
+      //   text: "#ffffff",
+      //   accent: "#ff6f61",
+      // },
+    ];
+
+    let currentTheme = 0; // Start with Neon Purple
+
+    function applyTheme(index) {
+      const theme = themes[index];
+      body.style.background = theme.background;
+      body.style.color = theme.text;
+      document.documentElement.style.setProperty("--accent", theme.accent);
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.style.background = theme.background; // Set footer background
+      }
+      themeToggle.innerText = `${theme.name}`; // Update button text
+    }
+
+    // Apply default theme on load
+    window.onload = () => {
+      applyTheme(currentTheme);
+    };
+
+    themeToggle.addEventListener("click", () => {
+      currentTheme = (currentTheme + 1) % themes.length;
+      applyTheme(currentTheme);
+    });
+
+  </script>
+
+
+  <!-- Theme Switcher Script -->
+  <!-- <script>
+  const themeDropdownButton = document.getElementById("theme-dropdown-button");
+  const themeDropdown = document.getElementById("theme-dropdown");
+  const body = document.body;
+
+  const themes = [
+    {
+      name: "cyberpunk",
+      background: "#0a0a0a",
+      text: "#ffffff",
+      accent: "#00ffea",
+    },
+    {
+      name: "matrix",
+      background: "#000000",
+      text: "#00ff00",
+      accent: "#00ff00",
+    },
+    {
+      name: "iron-man",
+      background: "#2a0a0a",
+      text: "#ffcc00",
+      accent: "#ff4444",
+    },
+    {
+      name: "captain-america",
+      background: "#0a0a2a",
+      text: "#ffffff",
+      accent: "#0044ff",
+    },
+    {
+      name: "neon-purple",
+      background: "#1a1a2e",
+      text: "#ffffff",
+      accent: "#9c27b0",
+    },
+  ];
+
+  // Toggle dropdown visibility
+  themeDropdownButton.addEventListener("click", () => {
+    themeDropdown.classList.toggle("show");
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (event) => {
+    if (!themeDropdownButton.contains(event.target) && !themeDropdown.contains(event.target)) {
+      themeDropdown.classList.remove("show");
+    }
+  });
+
+  // Change theme on dropdown item click
+  document.querySelectorAll(".dropdown-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const themeName = item.getAttribute("data-theme");
+      const theme = themes.find((t) => t.name === themeName);
+      if (theme) {
+        body.style.background = theme.background;
+        body.style.color = theme.text;
+        document.documentElement.style.setProperty("--accent", theme.accent);
+      }
+      themeDropdown.classList.remove("show");
+    });
+  });
+</script> -->
+
+  <!-- Smooth Scroll Animations -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("opacity-100", "translate-y-0");
+        }
+      });
+    });
+
+    document.querySelectorAll("section").forEach((section) => {
+      section.classList.add(
+        "opacity-0",
+        "translate-y-10",
+        "transition-all",
+        "duration-500"
+      );
+      observer.observe(section);
+    });
+  </script>
+  <script>
+    // Get the current year
+    const year = new Date().getFullYear();
+    // Insert the year into the footer
+    document.getElementById("current-year").innerHTML = year;
+  </script>
+</body>
+
+</html>

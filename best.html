@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cyberpunk Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Custom Cyberpunk Styles */
+    body {
+      font-family: 'Roboto Mono', monospace;
+      background: #0a0a0a;
+      color: #ffffff;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .neon-text {
+      text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent), 0 0 20px var(--accent);
+    }
+
+    .glitch-text {
+      position: relative;
+      animation: glitch 2s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    .holographic-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 234, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .holographic-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 255, 234, 0.3);
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/originals/3f/2c/97/3f2c979b214d06e9caab8ba8326864f3.gif') center/cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Floating Dock Navbar */
+    .dock-navbar {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .dock-item {
+      background: rgba(0, 255, 234, 0.1);
+      border: 1px solid rgba(0, 255, 234, 0.3);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dock-item:hover {
+      transform: scale(1.2) translateY(-5px);
+      background: rgba(0, 255, 234, 0.2);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    /* Theme Switcher */
+    .theme-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .theme-switcher button {
+      background: rgba(0, 255, 234, 0.1);
+      border: 1px solid rgba(0, 255, 234, 0.3);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .theme-switcher button:hover {
+      background: rgba(0, 255, 234, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Neon Grid Background */
+    .neon-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                  linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: -1;
+      animation: grid-scroll 10s linear infinite;
+    }
+
+    @keyframes grid-scroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+
+    /* Hacking Terminal Effect */
+    .terminal {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: rgba(0, 0, 0, 0.8);
+      border-top: 2px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Roboto Mono', monospace;
+      padding: 10px;
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .terminal::after {
+      content: ">";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- Theme Switcher -->
+  <div class="theme-switcher">
+    <button id="theme-toggle">Switch Theme</button>
+  </div>
+
+  <!-- Neon Grid Background -->
+  <div class="neon-grid"></div>
+
+  <!-- Particle Background -->
+  <div id="particles-js" class="particles-js"></div>
+
+  <!-- Floating Dock Navbar -->
+  <div class="dock-navbar">
+    <a href="#home" class="dock-item"><i class="fas fa-home"></i></a>
+    <a href="#skills" class="dock-item"><i class="fas fa-code"></i></a>
+    <a href="#experience" class="dock-item"><i class="fas fa-briefcase"></i></a>
+    <a href="#projects" class="dock-item"><i class="fas fa-project-diagram"></i></a>
+    <a href="#contact" class="dock-item"><i class="fas fa-envelope"></i></a>
+  </div>
+
+  <!-- Hacking Terminal -->
+  <div class="terminal">
+    <span class="glitch-text">Initializing system... Welcome to the Cyberpunk World.</span>
+  </div>
+
+  <!-- Landing Page -->
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center">
+    <div class="avatar-container">
+      <div class="avatar"></div>
+    </div>
+    <h1 class="text-6xl font-bold neon-text glitch-text mt-6">Welcome to My Cyberpunk World</h1>
+    <p class="text-xl text-gray-400 mt-4">Building the Future with React Native, AI, and Backend Magic</p>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12 relative z-10">
+    <!-- Skills Section -->
+    <section id="skills" class="mb-12">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">Skills</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Dynamic Skills -->
+        <script>
+          const skills = [
+            { name: 'React Native', icon: 'fab fa-react' },
+            { name: 'LLM Integration', icon: 'fas fa-brain' },
+            { name: 'Python', icon: 'fab fa-python' },
+            { name: 'FastAPI', icon: 'fas fa-bolt' },
+            { name: 'LangChain', icon: 'fas fa-link' },
+            { name: 'Node.js', icon: 'fab fa-node' },
+            { name: 'Next Js', icon: 'fab fa-js' },
+            { name: 'Docker', icon: 'fab fa-docker' },
+          ];
+
+          skills.forEach(skill => {
+            document.write(`
+              <div class="holographic-card p-6 rounded-lg flex flex-col items-center">
+                <i class="${skill.icon} text-4xl mb-4 text-blue-400"></i>
+                <h3 class="text-xl font-semibold">${skill.name}</h3>
+              </div>
+            `);
+          });
+        </script>
+      </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section id="experience" class="mb-12">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">Work Experience</h2>
+      <div class="space-y-6">
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">Software Engineer - XYZ Corp</h3>
+          <p class="text-gray-400">Jan 2022 - Present</p>
+          <p class="mt-2">Developed cross-platform mobile apps using React Native for iOS and Android. Integrated LLM APIs for AI-powered features.</p>
+        </div>
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">AI Developer - ABC Inc</h3>
+          <p class="text-gray-400">Jun 2020 - Dec 2021</p>
+          <p class="mt-2">Built AI-powered chatbots using Python, FastAPI, and LangChain. Deployed scalable backend solutions using Node.js and AWS.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Showcase -->
+    <section id="projects">
+      <h2 class="text-4xl font-bold neon-text glitch-text mb-8">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">AI Chat Assistant</h3>
+          <p class="text-gray-400">Built with Python, FastAPI, and LangChain. Integrated with React Native for mobile access.</p>
+        </div>
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">E-Commerce App</h3>
+          <p class="text-gray-400">Developed using React Native for iOS and Android. Backend powered by Node.js and AWS.</p>
+        </div>
+        <div class="holographic-card p-6 rounded-lg">
+          <h3 class="text-xl font-semibold">3D Interactive Portfolio</h3>
+          <p class="text-gray-400">Built with Three.js for immersive 3D visuals and animations.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-800 text-center py-6 mt-12 relative z-10">
+    <p class="text-gray-400">© 2023 My Portfolio. All rights reserved.</p>
+    <div class="mt-4 space-x-4">
+      <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-github text-2xl"></i></a>
+      <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-linkedin text-2xl"></i></a>
+      <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-twitter text-2xl"></i></a>
+    </div>
+  </footer>
+
+  <!-- Particle.js Script -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS.load('particles-js', 'particles.json', function() {
+      console.log('Particles.js loaded!');
+    });
+
+    // Make particles interactive
+    particlesJS.interact('particles-js', {
+      onhover: {
+        enable: true,
+        mode: 'bubble'
+      }
+    });
+  </script>
+
+  <!-- Theme Switcher Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    const themes = [
+      { name: 'cyberpunk', background: '#0a0a0a', text: '#ffffff', accent: '#00ffea' },
+      { name: 'neon-purple', background: '#1a1a2e', text: '#ffffff', accent: '#9c27b0' },
+      { name: 'cyber-green', background: '#16213e', text: '#ffffff', accent: '#4caf50' },
+      { name: 'matrix', background: '#000000', text: '#00ff00', accent: '#00ff00' },
+      { name: 'dark-neon', background: '#0d0d0d', text: '#ff0099', accent: '#ff0099' },
+    ];
+
+    let currentTheme = 0;
+
+    themeToggle.addEventListener('click', () => {
+      currentTheme = (currentTheme + 1) % themes.length;
+      const theme = themes[currentTheme];
+      body.style.background = theme.background;
+      body.style.color = theme.text;
+      document.documentElement.style.setProperty('--accent', theme.accent);
+    });
+  </script>
+
+  <!-- Smooth Scroll Animations -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+        }
+      });
+    });
+
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500');
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

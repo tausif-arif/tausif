@@ -73,15 +73,52 @@ export const AudioEngine: React.FC = () => {
           hoverOsc.stop(audioCtxRef.current.currentTime + 0.05);
         }
       };
+
+      // Play elegant soothing heartbeat/thump beat on scroll
+      let lastScrollY = window.scrollY;
+
+      const playScrollBeat = () => {
+        if (!audioEnabled || !audioCtxRef.current) return;
+        
+        const currentScrollY = window.scrollY;
+        // Trigger a soft soothing beat every 300 pixels scrolled
+        if (Math.abs(currentScrollY - lastScrollY) > 300) {
+          lastScrollY = currentScrollY;
+          
+          const ctx = audioCtxRef.current;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          // Use a pure sine wave for a clean, sophisticated sound
+          osc.type = 'sine'; 
+          
+          // High frequency (1000Hz) with zero pitch bending for a clean, sharp "tick"
+          osc.frequency.setValueAtTime(1000, ctx.currentTime);
+          
+          // Ultra-fast envelope (15 milliseconds) to make it sound like a luxury watch tick 
+          // or a premium UI click, rather than a childish drum.
+          gain.gain.setValueAtTime(0, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.001); // Instant attack, very quiet
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.015); // Instant decay
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.015);
+        }
+      };
       
       window.addEventListener('click', playClickSound);
       window.addEventListener('mouseover', playHoverSound);
+      window.addEventListener('scroll', playScrollBeat, { passive: true });
 
       return () => {
         osc.stop();
         osc.disconnect();
         window.removeEventListener('click', playClickSound);
         window.removeEventListener('mouseover', playHoverSound);
+        window.removeEventListener('scroll', playScrollBeat);
       };
     } else if (!audioEnabled && audioCtxRef.current) {
       audioCtxRef.current.suspend();

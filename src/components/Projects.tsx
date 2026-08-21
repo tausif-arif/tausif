@@ -44,18 +44,18 @@ export const Projects: React.FC = () => {
           Selected Works
         </h3>
       </div>
-      
+
       <div className="flex flex-col border-b border-white/10">
         {projectsData.map((project, idx) => (
-          <a 
-            key={idx} 
+          <a
+            key={idx}
             href={project.link}
             target={project.link !== "#" ? "_blank" : "_self"}
             rel="noreferrer"
             className="group flex flex-col md:flex-row md:items-center justify-between py-12 md:py-16 border-t border-white/10 hover:bg-white/5 transition-colors duration-500 px-4 md:px-8 relative overflow-hidden"
           >
             {/* Hover Background Accent */}
-            <div 
+            <div
               className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"
               style={{ background: 'linear-gradient(90deg, var(--accent) 0%, transparent 100%)' }}
             ></div>
@@ -75,7 +75,7 @@ export const Projects: React.FC = () => {
               <p className="text-zinc-400 font-light text-sm md:text-base max-w-md group-hover:text-zinc-300 transition-colors duration-300">
                 {project.description}
               </p>
-              
+
               {project.link !== "#" && (
                 <div className="hidden md:flex w-16 h-16 rounded-full border border-white/20 items-center justify-center group-hover:bg-white group-hover:text-black group-hover:scale-110 transition-all duration-500 shrink-0">
                   <i className="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-500"></i>

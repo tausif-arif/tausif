@@ -99,13 +99,14 @@ export const ThemeSwitcher: React.FC = () => {
   useEffect(() => {
     const applyTheme = (index: number) => {
       const theme = themes[index];
-      document.body.style.background = theme.background;
-      document.body.style.color = theme.text;
+      document.documentElement.style.setProperty("--background", theme.background);
+      document.documentElement.style.setProperty("--foreground", theme.text);
+      document.documentElement.style.setProperty("--text", theme.text); // fallback alias
       document.documentElement.style.setProperty("--accent", theme.accent);
-      const footer = document.querySelector('footer');
-      if (footer) {
-        footer.style.background = theme.background;
-      }
+      
+      // Also set body inline just in case
+      document.body.style.backgroundColor = theme.background;
+      document.body.style.color = theme.text;
     };
 
     applyTheme(currentThemeIndex);
@@ -116,8 +117,11 @@ export const ThemeSwitcher: React.FC = () => {
   };
 
   return (
-    <div className="theme-switcher">
-      <button onClick={toggleTheme} id="theme-toggle">
+    <div className="fixed top-6 right-6 z-[9001]">
+      <button 
+        onClick={toggleTheme} 
+        className="px-4 py-2 border border-white/20 text-[10px] font-mono uppercase tracking-widest text-white/50 hover:text-white hover:border-white transition-all duration-300 rounded backdrop-blur-sm bg-black/20"
+      >
         {themes[currentThemeIndex].name}
       </button>
     </div>

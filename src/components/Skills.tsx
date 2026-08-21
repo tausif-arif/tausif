@@ -1,19 +1,50 @@
 import React from 'react';
 
-const skillsData = [
-  { name: "React Native", category: "Mobile App Development", icon: "fab fa-react" },
-  { name: "LLM Integration", category: "Artificial Intelligence", icon: "fas fa-brain" },
-  { name: "Python", category: "Backend / Scripting", icon: "fab fa-python" },
-  { name: "FastAPI", category: "High-Performance APIs", icon: "fas fa-bolt" },
-  { name: "LangChain", category: "AI Orchestration", icon: "fas fa-link" },
-  { name: "Node.js", category: "Server-side Javascript", icon: "fab fa-node" },
-  { name: "Next.js", category: "Fullstack Web", icon: "fab fa-js" },
-  { name: "Docker", category: "Containerization", icon: "fab fa-docker" },
+const groupedSkills = [
+  {
+    category: "Mobile Apps",
+    number: "01",
+    skills: [
+      { name: "React Native", icon: "fab fa-react" },
+      { name: "Expo", icon: "fas fa-mobile-alt" },
+      { name: "iOS", icon: "fab fa-apple" },
+      { name: "Android", icon: "fab fa-android" }
+    ]
+  },
+  {
+    category: "Frontend",
+    number: "02",
+    skills: [
+      { name: "React.js", icon: "fab fa-react" },
+      { name: "Next.js", icon: "fab fa-js" },
+      { name: "TypeScript", icon: "fas fa-code" }
+    ]
+  },
+  {
+    category: "Backend",
+    number: "03",
+    skills: [
+      { name: "Node.js", icon: "fab fa-node-js" },
+      { name: "Supabase", icon: "fas fa-database" },
+      { name: "Firebase", icon: "fas fa-fire" }
+    ]
+  },
+  {
+    category: "Tools & AI",
+    number: "04",
+    skills: [
+      { name: "Git", icon: "fab fa-git-alt" },
+      { name: "CI/CD", icon: "fas fa-infinity" },
+      { name: "Fastlane", icon: "fas fa-space-shuttle" },
+      { name: "LLMs", icon: "fas fa-brain" },
+      { name: "AI Integration", icon: "fas fa-robot" }
+    ]
+  }
 ];
 
 export const Skills: React.FC = () => {
   return (
-    <section id="skills" className="mb-32 mt-12 section-animate relative z-10">
+    <section id="skills" className="mb-32 mt-12 section-animate relative z-10 w-full">
       <div className="flex flex-col gap-4 mb-16">
         <h2 className="text-sm font-mono tracking-[0.3em] uppercase" style={{ color: 'var(--accent)' }}>
           01 // Capabilities
@@ -23,26 +54,33 @@ export const Skills: React.FC = () => {
         </h3>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {skillsData.map((skill, idx) => (
+      <div className="flex flex-col border-t border-zinc-800 w-full">
+        {groupedSkills.map((group, idx) => (
           <div 
             key={idx} 
-            className="group relative p-8 border border-white/10 hover:border-white/30 backdrop-blur-md bg-black/20 transition-all duration-500 overflow-hidden"
+            className="group relative border-b border-zinc-800 py-8 md:py-12 flex flex-col md:flex-row justify-between items-start md:items-center transition-all duration-500 hover:bg-white/[0.02]"
           >
-            {/* Subtle gradient hover effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {/* Left side: Category Name */}
+            <div className="flex items-center gap-4 mb-6 md:mb-0 w-full md:w-1/3">
+              <span className="text-xs font-mono text-zinc-600 group-hover:text-[var(--accent)] transition-colors duration-300">
+                {group.number}
+              </span>
+              <h4 className="text-2xl md:text-3xl font-display font-bold uppercase tracking-tight text-zinc-400 group-hover:text-white transition-colors duration-300">
+                {group.category}
+              </h4>
+            </div>
             
-            <div className="relative z-10 flex flex-col gap-6 h-full justify-between">
-              <i className={`${skill.icon} text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1`} style={{ color: 'var(--accent)' }}></i>
-              
-              <div>
-                <h4 className="text-xl font-display font-medium tracking-tight mb-1 group-hover:text-white transition-colors">
+            {/* Right side: Skills tags with Icons */}
+            <div className="flex flex-wrap gap-3 md:gap-4 w-full md:w-2/3 justify-start md:justify-end">
+              {group.skills.map((skill, sIdx) => (
+                <span 
+                  key={sIdx}
+                  className="px-4 py-2.5 rounded-none font-mono text-[10px] md:text-xs uppercase tracking-wider bg-black/40 border border-zinc-800 text-zinc-400 group-hover:border-[var(--accent)] group-hover:text-white transition-all duration-300 flex items-center gap-2"
+                >
+                  <i className={`${skill.icon} text-sm group-hover:text-[var(--accent)] transition-colors duration-300`}></i>
                   {skill.name}
-                </h4>
-                <p className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
-                  {skill.category}
-                </p>
-              </div>
+                </span>
+              ))}
             </div>
           </div>
         ))}

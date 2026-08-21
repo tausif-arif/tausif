@@ -7,6 +7,7 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Skills } from './components/Skills';
 import { Experience } from './components/Experience';
+import { Projects } from './components/Projects';
 import { Footer } from './components/Footer';
 import { SmoothScroll } from './components/SmoothScroll';
 
@@ -33,17 +34,16 @@ function App() {
           {
             opacity: 0,
             y: 50,
-            filter: 'blur(10px)',
           },
           {
             opacity: 1,
             y: 0,
-            filter: 'blur(0px)',
             duration: 1,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: section,
               start: 'top 80%',
+              toggleActions: 'play none none reverse',
             },
           }
         );
@@ -63,16 +63,14 @@ function App() {
           <ThemeSwitcher />
           <HUDOverlay />
           <Navbar />
-
-          <Hero />
-          <About />
-
-          <main className="container mx-auto px-4 py-12">
+          <main className="container mx-auto px-4 md:px-8 overflow-x-hidden">
+            <Hero />
+            <About />
             <Skills />
             <Experience />
+            <Projects />
+            <Footer />
           </main>
-
-          <Footer />
           <SmoothScroll />
         </div>
       )}

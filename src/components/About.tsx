@@ -41,17 +41,21 @@ export const About: React.FC = () => {
               <span className="text-zinc-600">Visionary.</span>
             </h3>
 
-            <div className="flex flex-col gap-6 text-zinc-400 font-light leading-relaxed text-lg max-w-xl">
-              <p>
-                In a world where code is the lifeblood of innovation, I stand at the crossroads of <strong className="text-white font-medium">React Native and AI</strong>. I am part developer, part futurist, crafting solutions with rigorous precision and boundless ingenuity.
-              </p>
-              <p>
-                When others see limits, I see a sandbox of infinite possibilities. By integrating <strong className="text-white font-medium">Large Language Models</strong> with seamless mobile experiences, I don’t just write code—I engineer the next evolution of technology.
-              </p>
-              <p className="font-medium text-white italic mt-4 border-l-2 pl-4" style={{ borderColor: 'var(--accent)' }}>
-                Suit up. The future isn't going to build itself.
-              </p>
-            </div>
+            <div className="flex flex-col gap-6 text-zinc-400 font-light leading-relaxed text-lg max-w-2xl mx-auto">
+          <p>
+            With over <strong className="text-white font-medium">4 years of engineering experience</strong>, I stand at the crossroads of <strong className="text-white font-medium">React Native, AI, and scalable backend architecture</strong>. I am a software engineer focused on crafting solutions with rigorous precision and boundless ingenuity.
+          </p>
+          <p>
+            I have architected, built, and shipped <strong className="text-white font-medium">12+ production applications</strong> across healthcare, fitness, B2B commerce, and loyalty ecosystems. By integrating powerful frameworks and <strong className="text-white font-medium">AI integrations</strong> with seamless mobile experiences, I don’t just write code—I engineer the next evolution of technology.
+          </p>
+          
+          {/* Accent Line */}
+          <div className="w-16 h-[1px] mx-auto mt-4 mb-2" style={{ backgroundColor: 'var(--accent)' }}></div>
+          
+          <p className="font-medium text-white italic">
+            Suit up. The future isn't going to build itself.
+          </p>
+        </div>
 
             {/* Minimal Social Links */}
             <div className="flex gap-8 mt-12">

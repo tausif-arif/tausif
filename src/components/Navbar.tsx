@@ -20,6 +20,10 @@ export const Navbar: React.FC = () => {
           <i className="fas fa-briefcase text-lg"></i>
           <span className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform duration-200 text-[10px] font-mono tracking-widest bg-white/10 px-3 py-1 rounded backdrop-blur-md">WORK</span>
         </a>
+        <a href="#projects" className="group relative flex items-center justify-center text-zinc-400 hover:text-white transition-colors duration-300">
+          <i className="fas fa-layer-group text-lg"></i>
+          <span className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform duration-200 text-[10px] font-mono tracking-widest bg-white/10 px-3 py-1 rounded backdrop-blur-md">PROJECTS</span>
+        </a>
         <a href="#contact" className="group relative flex items-center justify-center text-zinc-400 hover:text-white transition-colors duration-300">
           <i className="fas fa-envelope text-lg"></i>
           <span className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform duration-200 text-[10px] font-mono tracking-widest bg-white/10 px-3 py-1 rounded backdrop-blur-md">CONTACT</span>

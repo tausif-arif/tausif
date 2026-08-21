@@ -5,13 +5,20 @@ const experienceData = [
     role: "Software Engineer",
     company: "Aeon Logiciel",
     date: "March 2024 - Present",
-    description: "Built cross-platform mobile apps with React Native for iOS and Android, integrating LLM APIs for AI-powered features. Also provided web app support using React.js for seamless cross-platform performance."
+    description: [
+      "Owned the complete end-to-end development lifecycle for 10+ production applications across healthcare, fitness, and B2B commerce.",
+      "Engineered cross-platform solutions, independently managing full-cycle App Store and Google Play deployments.",
+      "Collaborated directly with clients to architect scalable features and resolve critical production issues."
+    ]
   },
   {
     role: "Junior FullStack Engineer",
     company: "Aeon Logiciel",
     date: "Jan 2022 - March 2024",
-    description: "Built cross-platform mobile apps with React Native for iOS and Android, Built APIs for Node.js focusing on scalability and robust backend architecture."
+    description: [
+      "Built cross-platform mobile apps with React Native for iOS and Android.",
+      "Built APIs for Node.js focusing on scalability and robust backend architecture."
+    ]
   }
 ];
 
@@ -39,7 +46,7 @@ export const Experience: React.FC = () => {
               style={{ backgroundColor: 'var(--accent)' }}
             ></div>
             
-            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-4">
+            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-6">
               <div>
                 <h4 className="text-2xl font-display font-bold tracking-tight text-white group-hover:translate-x-2 transition-transform duration-500">
                   {job.role}
@@ -53,9 +60,14 @@ export const Experience: React.FC = () => {
               </div>
             </div>
             
-            <p className="text-zinc-400 leading-relaxed font-light max-w-3xl">
-              {job.description}
-            </p>
+            <ul className="flex flex-col gap-3">
+              {job.description.map((bullet, bulletIdx) => (
+                <li key={bulletIdx} className="text-zinc-400 leading-relaxed font-light max-w-3xl flex items-start gap-3">
+                  <span className="text-[10px] mt-2 opacity-50" style={{ color: 'var(--accent)' }}><i className="fas fa-chevron-right"></i></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>

@@ -8,28 +8,25 @@ export const BootSequence: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Premium minimalistic loading sequence
     let currentProgress = 0;
     const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 8) + 2;
+      // Slower increments (1 to 3 at a time) to make the loading feel deliberate
+      currentProgress += Math.floor(Math.random() * 3) + 1; 
       if (currentProgress >= 100) {
         currentProgress = 100;
         clearInterval(interval);
-        setTimeout(() => setIsLoaded(true), 500); // slight delay after reaching 100%
+        setTimeout(() => setIsLoaded(true), 800);
       }
       setProgress(currentProgress);
-    }, 120);
+    }, 150);
 
     return () => clearInterval(interval);
   }, []);
 
   const handleEnter = (withAudio: boolean) => {
     setAudioEnabled(withAudio);
-
-    // Smooth, premium exit animation
     if (containerRef.current) {
       gsap.to(containerRef.current, {
         opacity: 0,
@@ -91,8 +88,12 @@ export const BootSequence: React.FC = () => {
           ></div>
         </div>
 
-        <p className="text-xs text-zinc-500 uppercase tracking-widest font-mono">
-          {isLoaded ? 'System Ready' : 'Loading Assets'}
+        {/* Funny quote */}
+        <p className="text-xs text-zinc-400 font-mono italic text-center px-4 leading-relaxed max-w-xs">
+          {isLoaded 
+            ? `"See? Told you it would load. I don't mess up twice... mostly."`
+            : `"It's loading, I promise. Don't give up on me, it always works out in the end!"`
+          }
         </p>
       </div>
     </div>

@@ -20,7 +20,7 @@ const projectsData = [
     description: "Built three distinct applications for a US food delivery platform: consumer ordering, merchant management, and courier operations."
   },
   {
-    name: "CNC Home",
+    name: "CNC Homeopathy",
     category: "Professional Product",
     link: "#",
     description: "Developed a clinic management platform covering appointment scheduling, patient records, and prescription generation."

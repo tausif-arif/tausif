@@ -80,12 +80,6 @@ const themes = [
     accent: "#ff4444",
   },
   {
-    name: "Glacier",
-    background: "#e7ebf8",
-    text: "#004d40",
-    accent: "#00bcd4",
-  },
-  {
     name: "ImGroot",
     background: "#0a0a1a",
     text: "#ffffff",
@@ -103,7 +97,7 @@ export const ThemeSwitcher: React.FC = () => {
       document.documentElement.style.setProperty("--foreground", theme.text);
       document.documentElement.style.setProperty("--text", theme.text); // fallback alias
       document.documentElement.style.setProperty("--accent", theme.accent);
-      
+
       // Also set body inline just in case
       document.body.style.backgroundColor = theme.background;
       document.body.style.color = theme.text;
@@ -118,8 +112,8 @@ export const ThemeSwitcher: React.FC = () => {
 
   return (
     <div className="fixed top-6 right-6 z-[9001]">
-      <button 
-        onClick={toggleTheme} 
+      <button
+        onClick={toggleTheme}
         className="px-4 py-2 border border-white/20 text-[10px] font-mono uppercase tracking-widest text-white/50 hover:text-white hover:border-white transition-all duration-300 rounded backdrop-blur-sm bg-black/20"
       >
         {themes[currentThemeIndex].name}

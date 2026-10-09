@@ -35,13 +35,28 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             
             <div className="flex gap-8">
-              <a href="#" className="text-zinc-500 hover:text-white transition-colors duration-300 font-mono text-xs tracking-widest uppercase">
+              <a 
+                href="https://github.com/tausif-arif" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-zinc-500 hover:text-white transition-colors duration-300 font-mono text-xs tracking-widest uppercase"
+              >
                 GitHub
               </a>
-              <a href="#" className="text-zinc-500 hover:text-white transition-colors duration-300 font-mono text-xs tracking-widest uppercase">
+              <a 
+                href="https://www.linkedin.com/in/original-tausif" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-zinc-500 hover:text-white transition-colors duration-300 font-mono text-xs tracking-widest uppercase"
+              >
                 LinkedIn
               </a>
-              <a href="#" className="text-zinc-500 hover:text-white transition-colors duration-300 font-mono text-xs tracking-widest uppercase">
+              <a 
+                href="https://x.com/__tausif" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-zinc-500 hover:text-white transition-colors duration-300 font-mono text-xs tracking-widest uppercase"
+              >
                 Twitter
               </a>
             </div>

@@ -12,7 +12,7 @@ const experienceData = [
     ]
   },
   {
-    role: "Junior FullStack Engineer",
+    role: "Trainee Software Engineer",
     company: "Aeon Logiciel",
     date: "Jan 2022 - March 2024",
     description: [
@@ -33,19 +33,19 @@ export const Experience: React.FC = () => {
           Work Experience
         </h3>
       </div>
-      
+
       <div className="flex flex-col">
         {experienceData.map((job, idx) => (
           <div key={idx} className="relative pl-8 md:pl-12 py-8 group">
             {/* Timeline vertical line */}
             <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-white/10 group-hover:bg-white/30 transition-colors duration-500"></div>
-            
+
             {/* Timeline node */}
-            <div 
+            <div
               className="absolute left-[-4px] top-10 w-[9px] h-[9px] rounded-full transition-transform duration-500 group-hover:scale-150"
               style={{ backgroundColor: 'var(--accent)' }}
             ></div>
-            
+
             <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-6">
               <div>
                 <h4 className="text-2xl font-display font-bold tracking-tight text-white group-hover:translate-x-2 transition-transform duration-500">
@@ -59,7 +59,7 @@ export const Experience: React.FC = () => {
                 {job.date}
               </div>
             </div>
-            
+
             <ul className="flex flex-col gap-3">
               {job.description.map((bullet, bulletIdx) => (
                 <li key={bulletIdx} className="text-zinc-400 leading-relaxed font-light max-w-3xl flex items-start gap-3">

@@ -47,3 +47,4 @@ vite-env.d.ts
 # Logs
 logs/
 *.log
+.DS_Store

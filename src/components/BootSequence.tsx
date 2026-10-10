@@ -31,14 +31,18 @@ export const BootSequence: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Fake system crash for 1.5 seconds
+    if (hasEntered || window.location.pathname.startsWith('/blogs') || window.location.pathname.startsWith('/event-loop') || window.location.pathname.startsWith('/embeddings')) {
+      setShowFakeError(false);
+      return;
+    }
+
     const errorTimer = setTimeout(() => {
       setShowFakeError(false);
       startBootSequence();
     }, 1500);
 
     return () => clearTimeout(errorTimer);
-  }, []);
+  }, [hasEntered]);
 
   const startBootSequence = () => {
     const info = getSystemInfo();
